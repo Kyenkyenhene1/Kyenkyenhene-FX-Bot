@@ -1,19 +1,579 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFX Pro - Advanced Forex Trading Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+        }
+        .signal-buy {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+        }
+        .signal-sell {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+        }
+        .chart-container {
+            height: 400px;
+            background-color: #1e293b;
+            border-radius: 0.5rem;
+        }
+        .indicator-active {
+            box-shadow: 0 0 0 2px #3b82f6;
+        }
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .news-critical {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #ef4444;
+        }
+        .news-high {
+            background-color: rgba(234, 179, 8, 0.15);
+            border-left: 4px solid #eab308;
+        }
+        .news-medium {
+            background-color: rgba(59, 130, 246, 0.15);
+            border-left: 4px solid #3b82f6;
+        }
+        .slide-fade-enter-active {
+            transition: all 0.3s ease-out;
+        }
+        .slide-fade-leave-active {
+            transition: all 0.3s ease-in;
+        }
+        .slide-fade-enter-from,
+        .slide-fade-leave-to {
+            transform: translateX(20px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="gradient-bg text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-robot text-3xl"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold">QuantumFX Pro</h1>
+                            <p class="text-sm opacity-80">Advanced AI Forex Trading System</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-blue-600 px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-circle-notch animate-spin mr-2"></i>
+                            <span>Connected to MT5</span>
+                        </div>
+                        <div class="bg-green-500 px-4 py-2 rounded-lg">
+                            <span>Live Trading</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Left Sidebar -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Strategy Control -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-cogs mr-2 text-blue-500"></i>
+                            Strategy Control
+                        </h2>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Operation Mode</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button id="ml-mode-btn" class="bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all">
+                                    <i class="fas fa-brain mr-1"></i> ML Core
+                                </button>
+                                <button id="royal-mode-btn" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-all">
+                                    <i class="fas fa-chess-rook mr-1"></i> Royal Structure
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Trading Pairs</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>EURUSD</option>
+                                <option>GBPUSD</option>
+                                <option>USDJPY</option>
+                                <option>XAUUSD</option>
+                                <option>BTCUSD</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Timeframe</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>M1</option>
+                                <option>M5</option>
+                                <option>M15</option>
+                                <option>H1</option>
+                                <option>H4</option>
+                                <option selected>D1</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-blue-500" checked>
+                                <span class="ml-2 text-sm">Enable News Filter</span>
+                            </label>
+                            <label class="flex items-center mt-2">
+                                <input type="checkbox" class="rounded text-blue-500">
+                                <span class="ml-2 text-sm">Enable Volume Spike Detection</span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-sm font-medium flex-1 transition-all">
+                                <i class="fas fa-play mr-1"></i> Start Bot
+                            </button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all">
+                                <i class="fas fa-stop mr-1"></i> Stop
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Management -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-blue-500"></i>
+                            Risk Management
+                        </h2>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Risk per Trade (%)</label>
+                            <input type="range" min="0.5" max="5" step="0.5" value="2" class="w-full">
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>0.5%</span>
+                                <span>2%</span>
+                                <span>5%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Max Daily Trades</label>
+                            <input type="number" min="1" max="20" value="10" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Stop Loss Type</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>ATR Based (2x)</option>
+                                <option selected>Structure Based</option>
+                                <option>Fixed Pips</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Take Profit Ratio</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>1:1</option>
+                                <option selected>1:2</option>
+                                <option>1:3</option>
+                                <option>Trailing TP</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- ML Model Status -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-brain mr-2 text-blue-500"></i>
+                            ML Model Status
+                        </h2>
+                        
+                        <div class="flex items-center mb-3">
+                            <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                            <span class="text-sm">Model: XGBoost v2.4.1</span>
+                        </div>
+                        
+                        <div class="flex items-center mb-3">
+                            <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                            <span class="text-sm">Python Bridge: Active</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Last Training</label>
+                            <div class="text-sm">2023-07-15 (Accuracy: 87.4%)</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">Next Training</label>
+                            <div class="text-sm">2023-07-22 (Scheduled)</div>
+                        </div>
+                        
+                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all">
+                            <i class="fas fa-sync-alt mr-1"></i> Retrain Model Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Main Chart Area -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Chart -->
+                    <div class="bg-white rounded-xl shadow-md p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">EURUSD - D1</h2>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-200 text-gray-700 p-2 rounded-lg text-sm">
+                                    <i class="fas fa-chart-line"></i>
+                                </button>
+                                <button class="bg-gray-200 text-gray-700 p-2 rounded-lg text-sm">
+                                    <i class="fas fa-chart-candlestick"></i>
+                                </button>
+                                <button class="bg-blue-500 text-white p-2 rounded-lg text-sm">
+                                    <i class="fas fa-ruler-combined"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container relative">
+                            <!-- This would be a real chart in production -->
+                            <div class="absolute inset-0 flex items-center justify-center text-gray-400">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-line text-5xl mb-2"></i>
+                                    <p>Live Price Chart</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Simulated chart elements -->
+                            <div class="absolute bottom-20 left-1/4 w-16 h-2 bg-green-500 rounded-full"></div>
+                            <div class="absolute bottom-32 left-1/3 w-20 h-2 bg-red-500 rounded-full"></div>
+                            <div class="absolute bottom-40 right-1/4 w-24 h-2 bg-green-500 rounded-full"></div>
+                            
+                            <!-- Simulated order blocks -->
+                            <div class="absolute bottom-64 left-1/2 w-24 h-16 border-2 border-blue-400 bg-blue-100 bg-opacity-20"></div>
+                            <div class="absolute bottom-80 right-1/3 w-20 h-12 border-2 border-blue-400 bg-blue-100 bg-opacity-20"></div>
+                            
+                            <!-- Simulated FVG -->
+                            <div class="absolute bottom-48 left-3/4 w-8 h-24 border-2 border-purple-400 bg-purple-100 bg-opacity-20"></div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-4">
+                            <div class="text-sm">
+                                <span class="font-medium">Bid:</span> 1.12345
+                            </div>
+                            <div class="text-sm">
+                                <span class="font-medium">Ask:</span> 1.12358
+                            </div>
+                            <div class="text-sm">
+                                <span class="font-medium">Spread:</span> 1.3 pips
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicators Panel -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-chart-bar mr-2 text-blue-500"></i>
+                            Technical Indicators
+                        </h2>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center indicator-active">
+                                <div class="text-sm font-medium">EMA(20)</div>
+                                <div class="text-xs text-gray-500">1.12034</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">EMA(50)</div>
+                                <div class="text-xs text-gray-500">1.11876</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">EMA(200)</div>
+                                <div class="text-xs text-gray-500">1.11542</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">RSI(14)</div>
+                                <div class="text-xs text-gray-500">58.4</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">MACD</div>
+                                <div class="text-xs text-gray-500">+0.0012</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">Stoch</div>
+                                <div class="text-xs text-gray-500">72/65</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">ATR(14)</div>
+                                <div class="text-xs text-gray-500">0.0034</div>
+                            </div>
+                            <div class="indicator-item p-3 border rounded-lg cursor-pointer text-center">
+                                <div class="text-sm font-medium">Volume</div>
+                                <div class="text-xs text-gray-500">↑ 124%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trading Signals -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-bell mr-2 text-blue-500"></i>
+                            Trading Signals
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <div class="signal-buy p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium">Buy Signal</div>
+                                            <div class="text-xs text-gray-500">ML Confidence: 84%</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-sm">EURUSD @ 1.12345</div>
+                                        <div class="text-xs text-gray-500">2 mins ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="signal-sell p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white mr-3">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium">Sell Signal</div>
+                                            <div class="text-xs text-gray-500">Order Block Confirmed</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-sm">GBPUSD @ 1.30872</div>
+                                        <div class="text-xs text-gray-500">15 mins ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="signal-buy p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium">Buy Signal</div>
+                                            <div class="text-xs text-gray-500">FVG + RSI Divergence</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-sm">XAUUSD @ 1956.42</div>
+                                        <div class="text-xs text-gray-500">1 hour ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Sidebar -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Active Trades -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-exchange-alt mr-2 text-blue-500"></i>
+                            Active Trades
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <div class="border border-gray-200 rounded-lg p-3">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-green-600">EURUSD Buy</div>
+                                        <div class="text-xs text-gray-500">#12345</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-medium">1.12345</div>
+                                        <div class="text-xs text-gray-500">+1.2%</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-2 text-xs">
+                                    <div>SL: 1.12012</div>
+                                    <div>TP: 1.12878</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-red-600">GBPUSD Sell</div>
+                                        <div class="text-xs text-gray-500">#12346</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-medium">1.30872</div>
+                                        <div class="text-xs text-gray-500">-0.8%</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-2 text-xs">
+                                    <div>SL: 1.31245</div>
+                                    <div>TP: 1.30200</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                    <div class="bg-red-500 h-1.5 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-green-600">XAUUSD Buy</div>
+                                        <div class="text-xs text-gray-500">#12347</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-medium">1956.42</div>
+                                        <div class="text-xs text-gray-500">+2.1%</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-2 text-xs">
+                                    <div>SL: 1942.00</div>
+                                    <div>TP: 1978.50</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <div class="flex justify-between">
+                                <div class="text-sm">Today's P&L:</div>
+                                <div class="text-sm font-medium text-green-500">+$342.50</div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <div class="text-sm">This Week:</div>
+                                <div class="text-sm font-medium text-green-500">+$1,245.80</div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <div class="text-sm">Win Rate:</div>
+                                <div class="text-sm font-medium">72.4%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- News & Events -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-newspaper mr-2 text-blue-500"></i>
+                            News & Events
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <div class="news-critical p-3 rounded-lg">
+                                <div class="flex justify-between">
+                                    <div class="font-medium">US NFP Data</div>
+                                    <div class="text-xs bg-red-500 text-white px-2 py-1 rounded-full">Critical</div>
+                                </div>
+                                <div class="text-sm mt-1">Today, 12:30 UTC</div>
+                                <div class="text-xs text-gray-600 mt-1">Expected impact on USD pairs</div>
+                            </div>
+                            
+                            <div class="news-high p-3 rounded-lg">
+                                <div class="flex justify-between">
+                                    <div class="font-medium">ECB Rate Decision</div>
+                                    <div class="text-xs bg-yellow-500 text-white px-2 py-1 rounded-full">High</div>
+                                </div>
+                                <div class="text-sm mt-1">Tomorrow, 12:45 UTC</div>
+                                <div class="text-xs text-gray-600 mt-1">Potential EUR volatility</div>
+                            </div>
+                            
+                            <div class="news-medium p-3 rounded-lg">
+                                <div class="flex justify-between">
+                                    <div class="font-medium">UK CPI Data</div>
+                                    <div class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">Medium</div>
+                                </div>
+                                <div class="text-sm mt-1">Jul 18, 08:00 UTC</div>
+                                <div class="text-xs text-gray-600 mt-1">GBP pairs may be affected</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- System Logs -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-terminal mr-2 text-blue-500"></i>
+                            System Logs
+                        </h2>
+                        
+                        <div class="bg-gray-50 rounded-lg p-3 h-48 overflow-y-auto">
+                            <div class="text-xs font-mono space-y-1">
+                                <div class="text-gray-500">[10:23:45] ML Signal: BUY EURUSD (Confidence: 84%)</div>
+                                <div class="text-green-500">[10:23:47] Trade opened: #12345 BUY 0.5L EURUSD @ 1.12345</div>
+                                <div class="text-gray-500">[10:45:12] Order Block detected on GBPUSD H1</div>
+                                <div class="text-red-500">[10:45:15] Trade opened: #12346 SELL 0.5L GBPUSD @ 1.30872</div>
+                                <div class="text-gray-500">[11:02:33] FVG confirmed on XAUUSD M15</div>
+                                <div class="text-green-500">[11:02:35] Trade opened: #12347 BUY 0.5L XAUUSD @ 1956.42</div>
+                                <div class="text-blue-500">[11:30:00] News filter activated (US NFP in 2 hours)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex space-x-2">
+                            <button class="bg-gray-200 text-gray-700 py-1 px-3 rounded-lg text-xs font-medium">
+                                <i class="fas fa-download mr-1"></i> Export Logs
+                            </button>
+                            <button class="bg-gray-200 text-gray-700 py-1 px-3 rounded-lg text-xs font-medium">
+                                <i class="fas fa-trash-alt mr-1"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Toggle between ML Core and Royal Structure modes
+        document.getElementById('ml-mode-btn').addEventListener('click', function() {
+            this.classList.remove('bg-gray-200', 'text-gray-700');
+            this.classList.add('bg-blue-600', 'text-white');
+            
+            document.getElementById('royal-mode-btn').classList.remove('bg-blue-600', 'text-white');
+            document.getElementById('royal-mode-btn').classList.add('bg-gray-200', 'text-gray-700');
+            
+            // In a real app, we would update the strategy mode here
+        });
+        
+        document.getElementById('royal-mode-btn').addEventListener('click', function() {
+            this.classList.remove('bg-gray-200', 'text-gray-700');
+            this.classList.add('bg-blue-600', 'text-white');
+            
+            document.getElementById('ml-mode-btn').classList.remove('bg-blue-600', 'text-white');
+            document.getElementById('ml-mode-btn').classList.add('bg-gray-200', 'text-gray-700');
+            
+            // In a real app, we would update the strategy mode here
+        });
+        
+        // Indicator selection
+        const indicatorItems = document.querySelectorAll('.indicator-item');
+        indicatorItems.forEach(item => {
+            item.addEventListener('click', function() {
+                indicatorItems.forEach(i => i.classList.remove('indicator-active'));
+                this.classList.add('indicator-active');
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Kyenkyenhene/quantumfx-pro-advanced-ai-forex-trading-system" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
